@@ -1,25 +1,24 @@
 {
-    "name": "golden-path",
+    "name": "@nswhp/golden-path",
     "version": "0.0.1",
     "description": "Generate all the recommended golden paths",
-    "author": "Jeroen Ouwehand",
-    "repository": "https://github.com/jeroenouw/cgx",
+    "author": "",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nsw-health-pathology/golden-path.git"
+    },
     "license": "MIT",
     "main": "./lib/index.js",
     "bin": {
         "golden-path": "bin/golden-path"
     },
+    "files": [
+        "lib/**/*"
+    ],
     "keywords": [
         "cli",
         "golden-path",
-        "community",
-        "typescript",
-        "javascript",
-        "nodejs",
-        "documentation",
-        "generator",
-        "template",
-        "markdown"
+        "nswhp"
     ],
     "scripts": {
         "start": "npm run build && npm run global",
