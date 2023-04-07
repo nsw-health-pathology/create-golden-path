@@ -2,6 +2,16 @@ export interface Answer {
     files: Object;
     goldenPath: GoldenPathValue;
     projectName: string;
+    environmentSelection: string[];
+    versionSelection: string;
+    support: string;
+    reason: string;
+    serviceOffering: string;
+    supportContact: string;
+    accountNameQualified: string;
+    accountNameShort: string;
+    accountId: string;
+    costCenter: string;
     licenses?: LicenseValue;
     overwrite?: boolean;
 }
