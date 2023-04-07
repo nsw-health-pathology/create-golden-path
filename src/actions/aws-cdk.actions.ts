@@ -14,5 +14,4 @@ export async function awsCdkActions(): Promise<any>  {
 
     const accountDetails = await awsAccountQuestions();
 
-    return awsCdkTemplate();
 }
