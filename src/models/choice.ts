@@ -16,6 +16,22 @@ export interface Answer {
     overwrite?: boolean;
 }
 
+export interface TaggingAnswer {
+    costCenter: string;
+    support: string;
+    supportContact: string;
+    reason: string;
+    serviceOffering: string;
+}
+export interface AwsAccountAnswer {
+    accountNameQualified: string;
+    accountNameShort: string;
+    accountId: string;
+}
+export interface EnvironmentAwsAccountAnswer extends AwsAccountAnswer {
+    env: string;
+}
+
 export interface Choice {
     name: string;
     value: LicenseValue |

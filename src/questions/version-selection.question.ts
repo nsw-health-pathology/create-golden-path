@@ -5,7 +5,7 @@ export function versionSelectionQuestion(): Promise<Answer> {
     return inquirer.prompt([{
         type: 'list',
         name: 'versionSelection',
-        message: 'Press space on which version of the product you are creating:',
+        message: 'What version of the app is this:',
         choices: [
             '1', '2', '3', '4', '5'
         ],

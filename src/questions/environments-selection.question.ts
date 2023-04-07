@@ -5,11 +5,11 @@ export function environmentSelectionQuestion(): Promise<Answer> {
     return inquirer.prompt([{
         type: 'checkbox',
         name: 'environmentSelection',
-        message: 'Press space on which environments you wish to have:',
+        message: 'Selects what environments your project will have:',
         choices: [
-            { name: 'PD', checked: true },
-            { name: 'NP', checked: true },
-            { name: 'PILOT' },
+            { name: 'pd', checked: true },
+            { name: 'np', checked: true },
+            { name: 'pilot' },
           ],
     }]);
 }

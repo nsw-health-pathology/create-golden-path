@@ -7,7 +7,6 @@ export async function GoldenPath(): Promise<any> {
     showTitleAndBanner();
 
     const goldenPathAnswer = await goldenPathQuestion();
-    console.log(goldenPathAnswer);
 
     if (goldenPathAnswer.goldenPath === GoldenPathValue.AWS_CDK) {
         return await awsCdkActions();
