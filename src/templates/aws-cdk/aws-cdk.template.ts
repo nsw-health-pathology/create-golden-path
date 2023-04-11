@@ -4,6 +4,7 @@ import { FileName } from '../../models/files';
 import { showError, showGenerate, showInfo, showSuccess } from '../../utils/logger.util';
 import { defaultTemplate } from '../default/default.template';
 import { getAwsCdkBinCdkProjectTs, getAwsCdkConfig, getAwsCdkConfigFactoryTs, getAwsCdkConstantsTs, getAwsCdkEslintConfig, getAwsCdkEslintIgnore, getAwsCdkExampleTest, getAwsCdkGitIgnore, getAwsCdkInfrastructureTs, getAwsCdkJestConfig, getAwsCdkPackageJson, getAwsCdkPipeline, getAwsCdkPrettier, getAwsCdkReadme, getAwsCdkStackTs, getAwsCdkTaggingTs, getAwsCdkTsconfig } from './files';
+import { PLATFORM_PREFIXES } from '../../constants';
 
 export async function awsCdkTemplate(
     projectName: string,
@@ -51,7 +52,7 @@ export async function awsCdkTemplate(
 
         await defaultTemplate(FileName.INFRASTRUCTURE, getAwsCdkInfrastructureTs(), '/lib/config');
 
-        await defaultTemplate(`awp-${projectName}-v${version}.ts`, getAwsCdkBinCdkProjectTs(
+        await defaultTemplate(`${PLATFORM_PREFIXES.awsCdk}-${projectName}-v${version}.ts`, getAwsCdkBinCdkProjectTs(
             environments.find(env => env.env.toLocaleLowerCase() === 'np'),
             environments.find(env => env.env.toLocaleLowerCase() === 'qa'),
             environments.find(env => env.env.toLocaleLowerCase() === 'pd'),
@@ -59,7 +60,7 @@ export async function awsCdkTemplate(
             version
         ), '/bin');
 
-        await defaultTemplate(FileName.PIPELINE, getAwsCdkPipeline(projectName), '/.pipeline');
+        await defaultTemplate(FileName.PIPELINE, getAwsCdkPipeline(projectName, version), '/.pipeline');
 
         for (const environment of environments) {
             await defaultTemplate(`${environment.env.toLocaleLowerCase()}-stack.ts`, getAwsCdkStackTs(environment.env), '/lib');

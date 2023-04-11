@@ -1,8 +1,9 @@
+import { PLATFORM_PREFIXES } from "../../constants";
 import { EnvironmentAwsAccountAnswer, TaggingAnswer } from "../../models/choice";
 import { toTitleCase } from "../../utils/function.util";
 
 export const getAwsCdkPackageJson = (projectName: string, version: string) => `{
-    "name": "awp-${projectName}-v${version}",
+    "name": "${PLATFORM_PREFIXES.awsCdk}-${projectName}-v${version}",
     "version": "1.0.0",
     "description": "",
     "keywords": [],
@@ -113,7 +114,7 @@ export const getAwsCdkJestConfig = () => `module.exports = {
 `;
 
 export const getAwsCdkConfig = (projectName: string, version: string) => `{
-    "app": "npx ts-node --prefer-ts-exts bin/awp-${projectName}-v${version}.ts"
+    "app": "npx ts-node --prefer-ts-exts bin/${PLATFORM_PREFIXES.awsCdk}-${projectName}-v${version}.ts"
 }
 `;
 
@@ -450,25 +451,25 @@ export const getAwsCdkBinCdkProjectTs = (
     const app = new cdk.App();
 
     ${npDetails ? `new NpStack(app, 'Stack-np', {
-      stackName: 'awp-${projectName}-${version}-np',
+      stackName: '${PLATFORM_PREFIXES.awsCdk}-${projectName}-${version}-np',
       env: { account: C.AWS_ACCOUNTS.NP, region: C.AWS_REGION },
       terminationProtection: true,
     });` : ''}
 
     ${qaDetails ? `new NpStack(app, 'Stack-qa', {
-      stackName: 'awp-${projectName}-${version}-qa',
+      stackName: '${PLATFORM_PREFIXES.awsCdk}-${projectName}-${version}-qa',
       env: { account: C.AWS_ACCOUNTS.QA, region: C.AWS_REGION },
       terminationProtection: true,
     });` : ''}
 
     ${pdDetails ? `new PdStack(app, 'Stack-pd', {
-        stackName: 'awp-${projectName}-${version}-pd',
+        stackName: '${PLATFORM_PREFIXES.awsCdk}-${projectName}-${version}-pd',
         env: { account: C.AWS_ACCOUNTS.PD, region: C.AWS_REGION },
         terminationProtection: true,
     });` : ''}
 
     `
-export const getAwsCdkPipeline = (projectName: string) => `# Starter pipeline
+export const getAwsCdkPipeline = (projectName: string, version: string) => `# Starter pipeline
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -546,7 +547,7 @@ stages:
       - task: AWSShellScript@1
         displayName: Run cdk diff
         inputs:
-          awsCredentials: '${projectName}-$(Build.SourceBranchName)'
+          awsCredentials: '${PLATFORM_PREFIXES.awsCdk}-${projectName}-${version}-$(Build.SourceBranchName)'
           regionName: 'ap-southeast-2'
           scriptType: 'inline'
           inlineScript: 'npm run diff -- Stack-$(Build.SourceBranchName)'
@@ -554,7 +555,7 @@ stages:
       - task: AWSShellScript@1
         displayName: Run cdk deploy
         inputs:
-          awsCredentials: '${projectName}-$(Build.SourceBranchName)'
+          awsCredentials: '${PLATFORM_PREFIXES.awsCdk}-${projectName}-${version}-$(Build.SourceBranchName)'
           regionName: 'ap-southeast-2'
           scriptType: 'inline'
           inlineScript: 'npm run deploy -- Stack-$(Build.SourceBranchName) --require-approval never'
