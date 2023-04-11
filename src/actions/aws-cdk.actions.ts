@@ -4,7 +4,8 @@ import { awsAccountQuestions } from "../questions/aws-account.questions";
 import { environmentSelectionQuestion } from "../questions/environments-selection.question";
 import { taggingQuestions } from "../questions/tagging.questions";
 import { versionSelectionQuestion } from "../questions/version-selection.question";
-import { showInfo } from "../utils/logger.util";
+import { awsCdkTemplate } from "../templates/aws-cdk/aws-cdk.template";
+import { showInfo, showSuccess } from "../utils/logger.util";
 
 export async function awsCdkActions(): Promise<any> {
 
@@ -24,5 +25,7 @@ export async function awsCdkActions(): Promise<any> {
         accountDetails.push({env, ...envAccountDetails});
     }
 
-    console.log(projectName, versionSelection, environmentSelection, tagging, accountDetails);
+    await awsCdkTemplate(projectName, versionSelection, tagging, accountDetails);
+
+    showSuccess('Setup complete, you are now on the aws-cdk golden path');
 }

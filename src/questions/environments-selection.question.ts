@@ -9,7 +9,7 @@ export function environmentSelectionQuestion(): Promise<Answer> {
         choices: [
             { name: 'pd', checked: true },
             { name: 'np', checked: true },
-            { name: 'pilot' },
+            { name: 'qa' },
           ],
     }]);
 }

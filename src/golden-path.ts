@@ -13,4 +13,5 @@ export async function GoldenPath(): Promise<any> {
     } else if (goldenPathAnswer.goldenPath === GoldenPathValue.ANGULAR) {
         return await angularActions();
     }
+    process.exit(0);
 }

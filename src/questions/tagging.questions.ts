@@ -1,6 +1,5 @@
 import inquirer from 'inquirer';
 import { Answer, TaggingAnswer } from '../models/choice';
-import { showInfo } from '../utils/logger.util';
 
 export function supportQuestion(): Promise<Answer> {
     return inquirer.prompt([{

@@ -13,4 +13,12 @@ cd <your-repo-location>
 golden-path
 ```
 
+```shell
+
+cd <your-repo-location>
+
+# Then you run
+npx @nswhp/golden-path@latest
+```
+
 This should start the CLI and ask you some questions
