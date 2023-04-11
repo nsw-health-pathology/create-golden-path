@@ -13,5 +13,5 @@ export enum FileName {
     CONSTANTS_TS = 'constants.ts',
     CONFIG_FACTORY = 'config.factory.ts',
     INFRASTRUCTURE = 'infrastructure.ts',
-    PIPELINE = 'azure-pipeline.yml'
+    PIPELINE = 'azure-pipeline.yaml'
 }
