@@ -478,11 +478,11 @@ trigger:
 - np
 
 variables:
-- /$/{{ if eq(variables['Build.SourceBranchName'], 'pd') }}:
+- ${"${{ if eq(variables['Build.SourceBranchName'], 'pd') }}"}:
   - group: ${projectName}-pd
-- /$/{{ if eq(variables['Build.SourceBranchName'], 'qa') }}:
+- ${"${{ if eq(variables['Build.SourceBranchName'], 'qa') }}"}:
   - group: ${projectName}-qa
-- /$/{{ if eq(variables['Build.SourceBranchName'], 'np') }}:
+- ${"${{ if eq(variables['Build.SourceBranchName'], 'np') }}"}:
   - group: ${projectName}-np
 stages:
   - stage: CI
