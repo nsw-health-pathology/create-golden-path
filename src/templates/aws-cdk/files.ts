@@ -435,7 +435,8 @@ export const getAwsCdkBinCdkProjectTs = (
     npDetails: EnvironmentAwsAccountAnswer | undefined,
     qaDetails: EnvironmentAwsAccountAnswer | undefined,
     pdDetails: EnvironmentAwsAccountAnswer | undefined,
-    projectName: string) => `#!/usr/bin/env node
+    projectName: string,
+    version: string) => `#!/usr/bin/env node
 
     import 'source-map-support/register';
 
@@ -449,19 +450,19 @@ export const getAwsCdkBinCdkProjectTs = (
     const app = new cdk.App();
 
     ${npDetails ? `new NpStack(app, 'Stack-np', {
-      stackName: '${projectName}',
+      stackName: 'awp-${projectName}-np-${version}',
       env: { account: C.AWS_ACCOUNTS.NP, region: C.AWS_REGION },
       terminationProtection: true,
     });` : ''}
 
     ${qaDetails ? `new NpStack(app, 'Stack-qa', {
-      stackName: '${projectName}',
+      stackName: 'awp-${projectName}-qa-${version}',
       env: { account: C.AWS_ACCOUNTS.QA, region: C.AWS_REGION },
       terminationProtection: true,
     });` : ''}
 
     ${pdDetails ? `new PdStack(app, 'Stack-pd', {
-        stackName: '${projectName}',
+        stackName: 'awp-${projectName}-pd-${version}',
         env: { account: C.AWS_ACCOUNTS.PD, region: C.AWS_REGION },
         terminationProtection: true,
     });` : ''}

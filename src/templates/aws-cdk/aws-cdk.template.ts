@@ -55,7 +55,8 @@ export async function awsCdkTemplate(
             environments.find(env => env.env.toLocaleLowerCase() === 'np'),
             environments.find(env => env.env.toLocaleLowerCase() === 'qa'),
             environments.find(env => env.env.toLocaleLowerCase() === 'pd'),
-            projectName
+            projectName,
+            version
         ), '/bin');
 
         await defaultTemplate(FileName.PIPELINE, getAwsCdkPipeline(projectName), '/.pipeline');
