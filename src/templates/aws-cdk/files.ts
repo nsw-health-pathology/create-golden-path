@@ -450,19 +450,19 @@ export const getAwsCdkBinCdkProjectTs = (
     const app = new cdk.App();
 
     ${npDetails ? `new NpStack(app, 'Stack-np', {
-      stackName: 'awp-${projectName}-np-${version}',
+      stackName: 'awp-${projectName}-${version}-np',
       env: { account: C.AWS_ACCOUNTS.NP, region: C.AWS_REGION },
       terminationProtection: true,
     });` : ''}
 
     ${qaDetails ? `new NpStack(app, 'Stack-qa', {
-      stackName: 'awp-${projectName}-qa-${version}',
+      stackName: 'awp-${projectName}-${version}-qa',
       env: { account: C.AWS_ACCOUNTS.QA, region: C.AWS_REGION },
       terminationProtection: true,
     });` : ''}
 
     ${pdDetails ? `new PdStack(app, 'Stack-pd', {
-        stackName: 'awp-${projectName}-pd-${version}',
+        stackName: 'awp-${projectName}-${version}-pd',
         env: { account: C.AWS_ACCOUNTS.PD, region: C.AWS_REGION },
         terminationProtection: true,
     });` : ''}
