@@ -545,7 +545,7 @@ stages:
       - task: AWSShellScript@1
         displayName: Run cdk diff
         inputs:
-          awsCredentials: 'awpmc-genomics-$(Build.SourceBranchName)'
+          awsCredentials: '${projectName}-$(Build.SourceBranchName)'
           regionName: 'ap-southeast-2'
           scriptType: 'inline'
           inlineScript: 'npm run diff -- Stack-$(Build.SourceBranchName)'
@@ -553,7 +553,7 @@ stages:
       - task: AWSShellScript@1
         displayName: Run cdk deploy
         inputs:
-          awsCredentials: 'connection-$()'
+          awsCredentials: '${projectName}-$(Build.SourceBranchName)'
           regionName: 'ap-southeast-2'
           scriptType: 'inline'
           inlineScript: 'npm run deploy -- Stack-$(Build.SourceBranchName) --require-approval never'
