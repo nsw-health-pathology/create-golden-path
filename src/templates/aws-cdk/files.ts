@@ -2,7 +2,7 @@ import { EnvironmentAwsAccountAnswer, TaggingAnswer } from "../../models/choice"
 import { toTitleCase } from "../../utils/function.util";
 
 export const getAwsCdkPackageJson = (projectName: string) => `{
-    "name": "${projectName}}",
+    "name": "${projectName}",
     "version": "1.0.0",
     "description": "",
     "keywords": [],
