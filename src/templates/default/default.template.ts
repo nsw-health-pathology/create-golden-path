@@ -29,7 +29,7 @@ function createFile(filePath: string, fileName: string, fileContent: string, fil
             if (!error && fileAlreadyExists) return showUpdate(fileName, filePath);
             return showError(error);
         });
-        setTimeout(() => resolve(), 500);
+        setTimeout(() => resolve(), 250);
     })
 
 }

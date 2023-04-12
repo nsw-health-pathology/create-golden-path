@@ -4,11 +4,9 @@ import { FileName } from '../../models/files';
 import { showError, showGenerate, showInfo, showSuccess } from '../../utils/logger.util';
 import { defaultTemplate } from '../default/default.template';
 import { getAwsCdkBinCdkProjectTs, getAwsCdkConfig, getAwsCdkConfigFactoryTs, getAwsCdkConstantsTs, getAwsCdkEslintConfig, getAwsCdkEslintIgnore, getAwsCdkExampleTest, getAwsCdkGitIgnore, getAwsCdkInfrastructureTs, getAwsCdkJestConfig, getAwsCdkPackageJson, getAwsCdkPipeline, getAwsCdkPrettier, getAwsCdkReadme, getAwsCdkStackTs, getAwsCdkTaggingTs, getAwsCdkTsconfig } from './files';
-import { PLATFORM_PREFIXES } from '../../constants';
 
 export async function awsCdkTemplate(
     projectName: string,
-    version: string,
     tagging: TaggingAnswer,
     environments: EnvironmentAwsAccountAnswer[]
 ) {
@@ -18,9 +16,9 @@ export async function awsCdkTemplate(
         showInfo(`Begging to configure your project`);
         showInfo(`---------------------------------`);
 
-        await defaultTemplate(FileName.PACKAGE_JSON, getAwsCdkPackageJson(projectName, version));
+        await defaultTemplate(FileName.PACKAGE_JSON, getAwsCdkPackageJson(projectName));
 
-        await defaultTemplate(FileName.README, getAwsCdkReadme(projectName, version));
+        await defaultTemplate(FileName.README, getAwsCdkReadme(projectName, tagging));
 
         await defaultTemplate(FileName.TS_CONFIG, getAwsCdkTsconfig());
 
@@ -40,7 +38,7 @@ export async function awsCdkTemplate(
 
         await defaultTemplate(FileName.CONSTANTS_TS, getAwsCdkConstantsTs(environments), '/lib');
 
-        await defaultTemplate(FileName.CDK_JSON, getAwsCdkConfig(projectName, version));
+        await defaultTemplate(FileName.CDK_JSON, getAwsCdkConfig(projectName));
 
         await defaultTemplate(FileName.CONFIG_FACTORY, getAwsCdkConfigFactoryTs(
             environments.find(env => env.env.toLocaleLowerCase() === 'np'),
@@ -52,15 +50,14 @@ export async function awsCdkTemplate(
 
         await defaultTemplate(FileName.INFRASTRUCTURE, getAwsCdkInfrastructureTs(), '/lib/config');
 
-        await defaultTemplate(`${PLATFORM_PREFIXES.awsCdk}-${projectName}-v${version}.ts`, getAwsCdkBinCdkProjectTs(
+        await defaultTemplate(`${projectName}.ts`, getAwsCdkBinCdkProjectTs(
             environments.find(env => env.env.toLocaleLowerCase() === 'np'),
             environments.find(env => env.env.toLocaleLowerCase() === 'qa'),
             environments.find(env => env.env.toLocaleLowerCase() === 'pd'),
-            projectName,
-            version
+            projectName
         ), '/bin');
 
-        await defaultTemplate(FileName.PIPELINE, getAwsCdkPipeline(projectName, version), '/.pipeline');
+        await defaultTemplate(FileName.PIPELINE, getAwsCdkPipeline(projectName), '/.pipeline');
 
         for (const environment of environments) {
             await defaultTemplate(`${environment.env.toLocaleLowerCase()}-stack.ts`, getAwsCdkStackTs(environment.env), '/lib');

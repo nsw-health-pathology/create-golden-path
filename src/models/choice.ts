@@ -3,7 +3,6 @@ export interface Answer {
     goldenPath: GoldenPathValue;
     projectName: string;
     environmentSelection: string[];
-    versionSelection: string;
     support: string;
     reason: string;
     serviceOffering: string;
