@@ -481,11 +481,11 @@ trigger:
 
 variables:
 - ${"${{ if eq(variables['Build.SourceBranchName'], 'pd') }}"}:
-  - group: ${projectName}-pd
+  - group: ${PLATFORM_PREFIXES.awsCdk}-${projectName}-v${version}-pd
 - ${"${{ if eq(variables['Build.SourceBranchName'], 'qa') }}"}:
-  - group: ${projectName}-qa
+  - group: ${PLATFORM_PREFIXES.awsCdk}-${projectName}-v${version}-qa
 - ${"${{ if eq(variables['Build.SourceBranchName'], 'np') }}"}:
-  - group: ${projectName}-np
+  - group: ${PLATFORM_PREFIXES.awsCdk}-${projectName}-v${version}-np
 stages:
   - stage: CI
     pool:
@@ -547,7 +547,7 @@ stages:
       - task: AWSShellScript@1
         displayName: Run cdk diff
         inputs:
-          awsCredentials: '${PLATFORM_PREFIXES.awsCdk}-${projectName}-${version}-$(Build.SourceBranchName)'
+          awsCredentials: '${PLATFORM_PREFIXES.awsCdk}-${projectName}-v${version}-$(Build.SourceBranchName)'
           regionName: 'ap-southeast-2'
           scriptType: 'inline'
           inlineScript: 'npm run diff -- Stack-$(Build.SourceBranchName)'
@@ -555,7 +555,7 @@ stages:
       - task: AWSShellScript@1
         displayName: Run cdk deploy
         inputs:
-          awsCredentials: '${PLATFORM_PREFIXES.awsCdk}-${projectName}-${version}-$(Build.SourceBranchName)'
+          awsCredentials: '${PLATFORM_PREFIXES.awsCdk}-${projectName}-v${version}-$(Build.SourceBranchName)'
           regionName: 'ap-southeast-2'
           scriptType: 'inline'
           inlineScript: 'npm run deploy -- Stack-$(Build.SourceBranchName) --require-approval never'
